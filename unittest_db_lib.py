@@ -4,8 +4,8 @@
 import os
 import unittest
 
-#from db_lib_editing import add_to_db_list, buffer_merges, insert_key, insert_key_large_value, select_key, select_key_large_value, setup_db
-from db_lib import add_to_db_list, buffer_merges, insert_key, insert_key_large_value, select_key, select_key_large_value, setup_db
+#from db_lib_editing import add_to_db_list, buffer_merges, insert_key, insert_key_large_value, select_key, select_key_large_value, select_random, setup_db
+from db_lib import add_to_db_list, buffer_merges, insert_key, insert_key_large_value, select_key, select_key_large_value, select_random, setup_db
 
 scratch_db = '/tmp/deleteme_unittest_db_lib.sqlite3'
 archive_db = '/tmp/deleteme_unittest_db_lib_archive.sqlite3'
@@ -44,6 +44,9 @@ class DbFunctionsTest(unittest.TestCase):
 		#self.assertEqual(select_key(scratch_db, 'single_val_k1'), ['v1b'])
 		self.assertEqual(select_key([scratch_db, archive_db], 'archive_k11'), ['v11c'])
 		#self.assertEqual(select_key(archive_db, 'archive_k11'), ['v11c'])
+		self.assertEqual(select_random(scratch_db), ('single_val_k1', ['v1b']))
+		self.assertEqual(select_random(archive_db), ('archive_k11', ['v11c']))
+
 
 	def test005AppendValue(self):
 		"""Add new items to a row value."""
